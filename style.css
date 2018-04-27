@@ -1,0 +1,27 @@
+body{
+    background-color: #00bbff;
+}
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#myCanvas
+{
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+}
