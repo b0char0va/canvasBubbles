@@ -1,9 +1,9 @@
 let bubble = [];            //array to save new bubbles
 
-function setUp() {          // generates new bubbles
-    for (let i = 0; i < 120; i++) {
-        let x = Math.floor(Math.random() * (2000 - 50 + 1) + 50);
-        let y = Math.floor(Math.random() * (1000 - 50 + 1) + 50);
+function setUp(c) {          // generates new bubbles
+    for (let i = 0; i < 50; i++) {
+        let x = Math.floor(Math.random() * c.width);
+        let y = Math.floor(Math.random() * (c.height - 50 + 1) + 50);
         let r = Math.floor(Math.random() * (50 - 5 + 1) + 5);
         let color = getRandomColor();
         bubble[i] = new Bubbles(x, y, r, color);
@@ -21,36 +21,36 @@ function getRandomColor() {     //random bubble color generator
 
 function draw(c) {              //draws and moves bubble
     let ctx = c.getContext("2d");
-    ctx.clearRect(0, 0, 2000, 1000);
+    ctx.clearRect(0, 0, c.width, c.height);
     for (let i = 0; i < bubble.length; i++) {
         bubble[i].show(ctx);
-        bubble[i].move();
+        bubble[i].move(c);
     }
 }
 
 class Bubbles {
-    constructor(x, y, r, c) {
+    constructor(x, y, r, color) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.c = c;
+        this.color = color;
     }
 
-    move() {
+    move(c) {
         this.y = this.y - Math.random();
         if (this.y < 0 || this.x < 0) {
-            this.y = Math.floor(Math.random() * (1000 - 999 + 1) + 999);
-            this.x = Math.random() * 2000;
-        } else if (this.y > 1000 || this.x > 2000) {
-            this.y = Math.floor(Math.random() * (1000 - 999 + 1) + 999);
-            this.x = Math.random() * 2000;
+            this.y = Math.floor(Math.random() * (c.height - (c.height-1) + 1) + (c.height-1));
+            this.x = Math.random() * c.width;
+        } else if (this.y > c.height || this.x > c.width) {
+            this.y = Math.floor(Math.random() * (c.height - (c.height-1) + 1) + (c.height-1));
+            this.x = Math.random() * c.width;
         }
     }
 
     show(ctx) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-        ctx.fillStyle = this.c;
+        ctx.fillStyle = this.color;
         ctx.strokeStyle = "white";
         ctx.stroke();
         ctx.fill();
@@ -69,7 +69,7 @@ $(document).ready(function () {
     let c = document.getElementById("myCanvas");
     c.width = window.innerWidth;
     c.height = window.innerHeight;
-    setUp();
+    setUp(c);
     setInterval(function () {
         draw(c)
     }, 10);
