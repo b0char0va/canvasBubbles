@@ -54,7 +54,7 @@ class Bubbles {
         ctx.strokeStyle = "white";
         ctx.stroke();
         ctx.fill();
-        ctx.globalAlpha = 0.7;
+        ctx.globalAlpha = 0.6;
         ctx.beginPath();
         let smallx = this.x + this.r * Math.cos(-45 * Math.PI / 180) * 0.5;
         let smally = this.y + this.r * Math.sin(-45 * Math.PI / 180) * 0.5;
