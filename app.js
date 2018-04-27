@@ -1,10 +1,19 @@
 let bubble = [];            //array to save new bubbles
 
-function setUp(c) {          // generates new bubbles
-    for (let i = 0; i < 50; i++) {
+function setUp(c) {        // generates new bubbles
+    let m;
+    let size;
+    if (c.width < 700) {
+        m = 30;
+        size = 30;
+    } else {
+        m = 100;
+        size = 50;
+    }
+    for (let i = 0; i < m; i++) {
         let x = Math.floor(Math.random() * c.width);
         let y = Math.floor(Math.random() * (c.height - 50 + 1) + 50);
-        let r = Math.floor(Math.random() * (50 - 5 + 1) + 5);
+        let r = Math.floor(Math.random() * (size - 5 + 1) + 5);
         let color = getRandomColor();
         bubble[i] = new Bubbles(x, y, r, color);
     }
@@ -39,10 +48,10 @@ class Bubbles {
     move(c) {
         this.y = this.y - Math.random();
         if (this.y < 0 || this.x < 0) {
-            this.y = Math.floor(Math.random() * (c.height - (c.height-1) + 1) + (c.height-1));
+            this.y = Math.floor(Math.random() * (c.height - (c.height - 1) + 1) + (c.height - 1));
             this.x = Math.random() * c.width;
         } else if (this.y > c.height || this.x > c.width) {
-            this.y = Math.floor(Math.random() * (c.height - (c.height-1) + 1) + (c.height-1));
+            this.y = Math.floor(Math.random() * (c.height - (c.height - 1) + 1) + (c.height - 1));
             this.x = Math.random() * c.width;
         }
     }
